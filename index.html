@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>耗材申购系统 - 用户端</title>
+    <!-- 引入样式和图标 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .card-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .fade-in { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+    <!-- 嵌入耗材数据（原suppliesData.js内容） -->
+    <script>
+        window.suppliesData = [
+            // ========== 牙胶尖（18种） ==========
+            { id: 1, category: "牙胶尖", name: "牙胶尖", spec: "0215" },
+            { id: 2, category: "牙胶尖", name: "牙胶尖", spec: "0220" },
+            { id: 3, category: "牙胶尖", name: "牙胶尖", spec: "0225" },
+            { id: 4, category: "牙胶尖", name: "牙胶尖", spec: "0230" },
+            { id: 5, category: "牙胶尖", name: "牙胶尖", spec: "0235" },
+            { id: 6, category: "牙胶尖", name: "牙胶尖", spec: "0240" },
+            { id: 7, category: "牙胶尖", name: "牙胶尖", spec: "0415" },
+            { id: 8, category: "牙胶尖", name: "牙胶尖", spec: "0420" },
+            { id: 9, category: "牙胶尖", name: "牙胶尖", spec: "0425" },
+            { id: 10, category: "牙胶尖", name: "牙胶尖", spec: "0430" },
+            { id: 11, category: "牙胶尖", name: "牙胶尖", spec: "0435" },
+            { id: 12, category: "牙胶尖", name: "牙胶尖", spec: "0440" },
+            { id: 13, category: "牙胶尖", name: "牙胶尖", spec: "0615" },
+            { id: 14, category: "牙胶尖", name: "牙胶尖", spec: "0620" },
+            { id: 15, category: "牙胶尖", name: "牙胶尖", spec: "0625" },
+            { id: 16, category: "牙胶尖", name: "牙胶尖", spec: "0630" },
+            { id: 17, category: "牙胶尖", name: "牙胶尖", spec: "0635" },
+            { id: 18, category: "牙胶尖", name: "牙胶尖", spec: "0640" },
+
+            // ========== 吸潮纸尖（18种） ==========
+            { id: 19, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0215" },
+            { id: 20, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0220" },
+            { id: 21, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0225" },
+            { id: 22, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0230" },
+            { id: 23, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0235" },
+            { id: 24, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0240" },
+            { id: 25, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0415" },
+            { id: 26, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0420" },
+            { id: 27, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0425" },
+            { id: 28, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0430" },
+            { id: 29, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0435" },
+            { id: 30, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0440" },
+            { id: 31, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0615" },
+            { id: 32, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0620" },
+            { id: 33, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0625" },
+            { id: 34, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0630" },
+            { id: 35, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0635" },
+            { id: 36, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0640" },
+
+            // ========== 欧罗德卡机用锉（24种） ==========
+            { id: 37, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 15#03" },
+            { id: 38, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 20#04" },
+            { id: 39, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 25#04" },
+            { id: 40, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 30#04" },
+            { id: 41, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 35#04" },
+            { id: 42, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 15#03" },
+            { id: 43, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 20#04" },
+            { id: 44, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 25#04" },
+            { id: 45, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 30#04" },
+            { id: 46, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 35#04" },
+            { id: 47, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 20#05" },
+            { id: 48, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 20#05" },
+            { id: 49, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 20#06" },
+            { id: 50, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 25#06" },
+            { id: 51, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 30#06" },
+            { id: 52, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 35#06" },
+            { id: 53, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 20#06" },
+            { id: 54, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 25#06" },
+            { id: 55, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 30#06" },
+            { id: 56, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm 35#06" },
+            { id: 57, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm04锥混合装" },
+            { id: 58, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm04锥混合装" },
+            { id: 59, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm06锥混合装" },
+            { id: 60, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm06锥混合装" },
+
+            // ========== 萨尼机用锉（24种） ==========
+            { id: 61, category: "萨尼机用锉", name: "萨尼机用锉", spec: "开口锉" },
+            { id: 62, category: "萨尼机用锉", name: "萨尼机用锉", spec: "白柔" },
+            { id: 63, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 20#04" },
+            { id: 64, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 25#04" },
+            { id: 65, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 30#04" },
+            { id: 66, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 35#04" },
+            { id: 67, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 20#04" },
+            { id: 68, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 25#04" },
+            { id: 69, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 30#04" },
+            { id: 70, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 35#04" },
+            { id: 71, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 20#05" },
+            { id: 72, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 20#05" },
+            { id: 73, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 20#06" },
+            { id: 74, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 25#06" },
+            { id: 75, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 30#06" },
+            { id: 76, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 35#06" },
+            { id: 77, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 20#06" },
+            { id: 78, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 25#06" },
+            { id: 79, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 30#06" },
+            { id: 80, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm 35#06" },
+            { id: 81, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm04锥混合装" },
+            { id: 82, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm04锥混合装" },
+            { id: 83, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm06锥混合装" },
+            { id: 84, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm06锥混合装" },
+
+            // ========== VDW C锉（18种） ==========
+            { id: 85, category: "VDW C锉", name: "VDW C锉", spec: "21mm 06#" },
+            { id: 86, category: "VDW C锉", name: "VDW C锉", spec: "21mm 08#" },
+            { id: 87, category: "VDW C锉", name: "VDW C锉", spec: "21mm 10#" },
+            { id: 88, category: "VDW C锉", name: "VDW C锉", spec: "21mm 15#" },
+            { id: 89, category: "VDW C锉", name: "VDW C锉", spec: "21mm 20#" },
+            { id: 90, category: "VDW C锉", name: "VDW C锉", spec: "21mm 25#" },
+            { id: 91, category: "VDW C锉", name: "VDW C锉", spec: "21mm 30#" },
+            { id: 92, category: "VDW C锉", name: "VDW C锉", spec: "21mm 35#" },
+            { id: 93, category: "VDW C锉", name: "VDW C锉", spec: "21mm 40#" },
+            { id: 94, category: "VDW C锉", name: "VDW C锉", spec: "25mm 06#" },
+            { id: 95, category: "VDW C锉", name: "VDW C锉", spec: "25mm 08#" },
+            { id: 96, category: "VDW C锉", name: "VDW C锉", spec: "25mm 10#" },
+            { id: 97, category: "VDW C锉", name: "VDW C锉", spec: "25mm 15#" },
+            { id: 98, category: "VDW C锉", name: "VDW C锉", spec: "25mm 20#" },
+            { id: 99, category: "VDW C锉", name: "VDW C锉", spec: "25mm 25#" },
+            { id: 100, category: "VDW C锉", name: "VDW C锉", spec: "25mm 30#" },
+            { id: 101, category: "VDW C锉", name: "VDW C锉", spec: "25mm 35#" },
+            { id: 102, category: "VDW C锉", name: "VDW C锉", spec: "25mm 40#" },
+
+            // ========== 马尼K锉（18种） ==========
+            { id: 103, category: "马尼K锉", name: "马尼K锉", spec: "21mm 06#" },
+            { id: 104, category: "马尼K锉", name: "马尼K锉", spec: "21mm 08#" },
+            { id: 105, category: "马尼K锉", name: "马尼K锉", spec: "21mm 10#" },
+            { id: 106, category: "马尼K锉", name: "马尼K锉", spec: "21mm 15#" },
+            { id: 107, category: "马尼K锉", name: "马尼K锉", spec: "21mm 20#" },
+            { id: 108, category: "马尼K锉", name: "马尼K锉", spec: "21mm 25#" },
+            { id: 109, category: "马尼K锉", name: "马尼K锉", spec: "21mm 30#" },
+            { id: 110, category: "马尼K锉", name: "马尼K锉", spec: "21mm 35#" },
+            { id: 111, category: "马尼K锉", name: "马尼K锉", spec: "21mm 40#" },
+            { id: 112, category: "马尼K锉", name: "马尼K锉", spec: "25mm 06#" },
+            { id: 113, category: "马尼K锉", name: "马尼K锉", spec: "25mm 08#" },
+            { id: 114, category: "马尼K锉", name: "马尼K锉", spec: "25mm 10#" },
+            { id: 115, category: "马尼K锉", name: "马尼K锉", spec: "25mm 15#" },
+            { id: 116, category: "马尼K锉", name: "马尼K锉", spec: "25mm 20#" },
+            { id: 117, category: "马尼K锉", name: "马尼K锉", spec: "25mm 25#" },
+            { id: 118, category: "马尼K锉", name: "马尼K锉", spec: "25mm 30#" },
+            { id: 119, category: "马尼K锉", name: "马尼K锉", spec: "25mm 35#" },
+            { id: 120, category: "马尼K锉", name: "马尼K锉", spec: "25mm 40#" },
+
+            // ========== 马尼H锉（18种） ==========
+            { id: 121, category: "马尼H锉", name: "马尼H锉", spec: "21mm 06#" },
+            { id: 122, category: "马尼H锉", name: "马尼H锉", spec: "21mm 08#" },
+            { id: 123, category: "马尼H锉", name: "马尼H锉", spec: "21mm 10#" },
+            { id: 124, category: "马尼H锉", name: "马尼H锉", spec: "21mm 15#" },
+            { id: 125, category: "马尼H锉", name: "马尼H锉", spec: "21mm 20#" },
+            { id: 126, category: "马尼H锉", name: "马尼H锉", spec: "21mm 25#" },
+            { id: 127, category: "马尼H锉", name: "马尼H锉", spec: "21mm 30#" },
+            { id: 128, category: "马尼H锉", name: "马尼H锉", spec: "21mm 35#" },
+            { id: 129, category: "马尼H锉", name: "马尼H锉", spec: "21mm 40#" },
+            { id: 130, category: "马尼H锉", name: "马尼H锉", spec: "25mm 06#" },
+            { id: 131, category: "马尼H锉", name: "马尼H锉", spec: "25mm 08#" },
+            { id: 132, category: "马尼H锉", name: "马尼H锉", spec: "25mm 10#" },
+            { id: 133, category: "马尼H锉", name: "马尼H锉", spec: "25mm 15#" },
+            { id: 134, category: "马尼H锉", name: "马尼H锉", spec: "25mm 20#" },
+            { id: 135, category: "马尼H锉", name: "马尼H锉", spec: "25mm 25#" },
+            { id: 136, category: "马尼H锉", name: "马尼H锉", spec: "25mm 30#" },
+            { id: 137, category: "马尼H锉", name: "马尼H锉", spec: "25mm 35#" },
+            { id: 138, category: "马尼H锉", name: "马尼H锉", spec: "25mm 40#" }
+        ];
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 登录页面（仅需姓名） -->
+    <div id="login-page" class="flex items-center justify-center min-h-screen px-4">
+        <div class="w-full max-w-md bg-white rounded-lg p-8 card-shadow fade-in">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">耗材申购系统</h2>
+            <div id="login-error" class="hidden text-red-500 text-center mb-4"></div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">申购人姓名</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="请输入您的姓名">
+                </div>
+                <button id="login-btn" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+                    登录
+                </button>
+                <div class="flex justify-between items-center">
+                    <a href="admin.html" class="text-sm text-blue-600 hover:text-blue-800">管理员入口</a>
+                </div>
+            </div>
+            <div class="mt-4 text-center text-sm text-gray-500">
+                提示：输入任意姓名即可登录
+            </div>
+        </div>
+    </div>
+
+    <!-- 申购主页面（默认隐藏） -->
+    <div id="apply-page" class="hidden fade-in">
+        <!-- 顶部导航 -->
+        <nav class="bg-white shadow-sm px-6 py-4 sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold text-gray-800">耗材申购系统</h1>
+                <div class="flex items-center gap-4">
+                    <span id="user-display" class="text-gray-700"></span>
+                    <button id="logout-btn" class="text-red-600 hover:text-red-700 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-1"></i>退出登录
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 主内容区 -->
+        <div class="container mx-auto px-4 py-6">
+            <!-- 搜索&筛选栏 -->
+            <div class="bg-white p-4 rounded-lg card-shadow mb-6">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <div class="relative">
+                            <input type="text" id="search-input" class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="搜索耗材名称/规格">
+                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-48">
+                        <select id="category-filter" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="all">全部分类</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 耗材列表 -->
+            <div class="bg-white rounded-lg card-shadow mb-6">
+                <div class="p-4 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-800">耗材列表（共<span id="total-count">0</span>种）</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">分类</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">耗材名称</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">规格</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="supplies-list" class="divide-y divide-gray-200">
+                            <!-- 耗材列表由JS动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 购物车 -->
+            <div class="bg-white rounded-lg card-shadow mb-6">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-gray-800">申购清单</h2>
+                    <span id="cart-count" class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">0</span>
+                </div>
+                <div id="empty-cart" class="py-12 text-center text-gray-500">
+                    <i class="fas fa-shopping-cart text-4xl mb-2"></i>
+                    <p>暂无申购耗材</p>
+                </div>
+                <div id="cart-items" class="hidden overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">分类</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">耗材名称</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">规格</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-list" class="divide-y divide-gray-200">
+                            <!-- 购物车列表由JS动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="cart-footer" class="hidden p-4 border-t border-gray-200 flex justify-end">
+                    <button id="submit-apply" class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition-colors">
+                        <i class="fas fa-paper-plane mr-1"></i>提交申购
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 申购成功弹窗 -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full text-center">
+            <i class="fas fa-check-circle text-4xl text-green-500 mb-4"></i>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">申购提交成功！</h3>
+            <p class="text-gray-600 mb-6">您的申购单已提交，后台已记录相关信息</p>
+            <button id="close-modal" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                确认
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let cart = [];
+        let currentUser = "";
+        let suppliesData = window.suppliesData || [];
+
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化分类筛选
+            initCategoryFilter();
+            // 初始化耗材列表
+            renderSuppliesList(suppliesData);
+            // 更新总数显示
+            document.getElementById('total-count').textContent = suppliesData.length;
+            
+            // 绑定事件
+            document.getElementById('login-btn').addEventListener('click', login);
+            document.getElementById('logout-btn').addEventListener('click', logout);
+            document.getElementById('search-input').addEventListener('input', filterSupplies);
+            document.getElementById('category-filter').addEventListener('change', filterSupplies);
+            document.getElementById('submit-apply').addEventListener('click', submitApply);
+            document.getElementById('close-modal').addEventListener('click', closeModal);
+        });
+
+        // ========== 登录相关（仅需姓名） ==========
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const errorEl = document.getElementById('login-error');
+            
+            if (!username) {
+                errorEl.textContent = "申购人姓名不能为空";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            
+            // 任意姓名均可登录
+            currentUser = username;
+            document.getElementById('user-display').textContent = `当前申购人：${username}`;
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('apply-page').classList.remove('hidden');
+            errorEl.classList.add('hidden');
+        }
+
+        function logout() {
+            currentUser = "";
+            cart = [];
+            updateCart();
+            document.getElementById('username').value = "";
+            document.getElementById('apply-page').classList.add('hidden');
+            document.getElementById('login-page').classList.remove('hidden');
+        }
+
+        // ========== 耗材列表相关 ==========
+        function initCategoryFilter() {
+            // 提取所有唯一分类
+            const categories = [...new Set(suppliesData.map(item => item.category))];
+            const filterEl = document.getElementById('category-filter');
+            
+            // 添加分类选项
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                filterEl.appendChild(option);
+            });
+        }
+
+        function renderSuppliesList(list) {
+            const listEl = document.getElementById('supplies-list');
+            listEl.innerHTML = "";
+            
+            if (list.length === 0) {
+                listEl.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+                            暂无匹配的耗材
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            list.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.category}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.spec}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <button onclick="addToCart(${item.id})" class="text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-plus-circle mr-1"></i>加入申购
+                        </button>
+                    </td>
+                `;
+                listEl.appendChild(tr);
+            });
+        }
+
+        function filterSupplies() {
+            const searchText = document.getElementById('search-input').value.toLowerCase().trim();
+            const selectedCategory = document.getElementById('category-filter').value;
+            
+            // 筛选逻辑
+            const filteredList = suppliesData.filter(item => {
+                // 分类筛选
+                const categoryMatch = selectedCategory === "all" || item.category === selectedCategory;
+                // 搜索筛选（名称/规格）
+                const searchMatch = item.name.toLowerCase().includes(searchText) || item.spec.toLowerCase().includes(searchText);
+                return categoryMatch && searchMatch;
+            });
+            
+            renderSuppliesList(filteredList);
+            document.getElementById('total-count').textContent = filteredList.length;
+        }
+
+        // ========== 购物车相关 ==========
+        function addToCart(supplyId) {
+            const supply = suppliesData.find(item => item.id === supplyId);
+            if (!supply) return;
+            
+            // 检查是否已在购物车
+            const existingItem = cart.find(item => item.id === supplyId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: supply.id,
+                    category: supply.category,
+                    name: supply.name,
+                    spec: supply.spec,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+        }
+
+        function removeFromCart(supplyId) {
+            cart = cart.filter(item => item.id !== supplyId);
+            updateCart();
+        }
+
+        function changeQuantity(supplyId, change) {
+            const item = cart.find(item => item.id === supplyId);
+            if (item) {
+                item.quantity += change;
+                // 数量不能小于1
+                if (item.quantity < 1) item.quantity = 1;
+                updateCart();
+            }
+        }
+
+        function updateCart() {
+            const cartCountEl = document.getElementById('cart-count');
+            const emptyCartEl = document.getElementById('empty-cart');
+            const cartItemsEl = document.getElementById('cart-items');
+            const cartFooterEl = document.getElementById('cart-footer');
+            const cartListEl = document.getElementById('cart-list');
+            
+            // 更新数量显示
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = totalCount;
+            
+            // 显示/隐藏空购物车提示
+            if (cart.length === 0) {
+                emptyCartEl.classList.remove('hidden');
+                cartItemsEl.classList.add('hidden');
+                cartFooterEl.classList.add('hidden');
+                return;
+            }
+            
+            emptyCartEl.classList.add('hidden');
+            cartItemsEl.classList.remove('hidden');
+            cartFooterEl.classList.remove('hidden');
+            
+            // 渲染购物车列表
+            cartListEl.innerHTML = "";
+            cart.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.category}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.spec}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        <div class="flex items-center">
+                            <button onclick="changeQuantity(${item.id}, -1)" class="text-gray-500 hover:text-gray-700 px-2">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="changeQuantity(${item.id}, 1)" class="text-gray-500 hover:text-gray-700 px-2">+</button>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <button onclick="removeFromCart(${item.id})" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash mr-1"></i>删除
+                        </button>
+                    </td>
+                `;
+                cartListEl.appendChild(tr);
+            });
+        }
+
+        // ========== 申购提交相关 ==========
+        function submitApply() {
+            if (cart.length === 0 || !currentUser) return;
+            
+            // 构造申购数据
+            const applyData = {
+                username: currentUser,
+                applyTime: new Date().toLocaleString(),
+                items: cart.map(item => ({
+                    category: item.category,
+                    name: item.name,
+                    spec: item.spec,
+                    quantity: item.quantity
+                }))
+            };
+            
+            // 本地存储记录（模拟后台）
+            saveApplyRecord(applyData);
+            
+            // 清空购物车
+            cart = [];
+            updateCart();
+            
+            // 显示成功弹窗
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function saveApplyRecord(applyData) {
+            // 从localStorage获取现有记录
+            let records = JSON.parse(localStorage.getItem('applyRecords') || '[]');
+            // 添加新记录
+            records.push(applyData);
+            // 保存回localStorage
+            localStorage.setItem('applyRecords', JSON.stringify(records));
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
