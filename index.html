@@ -12,10 +12,11 @@
         .fade-in { animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
-    <!-- 嵌入耗材数据（原suppliesData.js内容） -->
+    <!-- 嵌入耗材数据（包含新增分类） -->
     <script>
         window.suppliesData = [
-            // ========== 牙胶尖（18种） ==========
+            // ========== 原有分类 ==========
+            // 牙胶尖（18种）
             { id: 1, category: "牙胶尖", name: "牙胶尖", spec: "0215" },
             { id: 2, category: "牙胶尖", name: "牙胶尖", spec: "0220" },
             { id: 3, category: "牙胶尖", name: "牙胶尖", spec: "0225" },
@@ -35,7 +36,7 @@
             { id: 17, category: "牙胶尖", name: "牙胶尖", spec: "0635" },
             { id: 18, category: "牙胶尖", name: "牙胶尖", spec: "0640" },
 
-            // ========== 吸潮纸尖（18种） ==========
+            // 吸潮纸尖（18种）
             { id: 19, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0215" },
             { id: 20, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0220" },
             { id: 21, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0225" },
@@ -55,7 +56,7 @@
             { id: 35, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0635" },
             { id: 36, category: "吸潮纸尖", name: "吸潮纸尖", spec: "0640" },
 
-            // ========== 欧罗德卡机用锉（24种） ==========
+            // 欧罗德卡机用锉（24种）
             { id: 37, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 15#03" },
             { id: 38, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 20#04" },
             { id: 39, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm 25#04" },
@@ -81,7 +82,7 @@
             { id: 59, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "21mm06锥混合装" },
             { id: 60, category: "欧罗德卡机用锉", name: "欧罗德卡机用锉", spec: "25mm06锥混合装" },
 
-            // ========== 萨尼机用锉（24种） ==========
+            // 萨尼机用锉（24种）
             { id: 61, category: "萨尼机用锉", name: "萨尼机用锉", spec: "开口锉" },
             { id: 62, category: "萨尼机用锉", name: "萨尼机用锉", spec: "白柔" },
             { id: 63, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm 20#04" },
@@ -107,7 +108,7 @@
             { id: 83, category: "萨尼机用锉", name: "萨尼机用锉", spec: "21mm06锥混合装" },
             { id: 84, category: "萨尼机用锉", name: "萨尼机用锉", spec: "25mm06锥混合装" },
 
-            // ========== VDW C锉（18种） ==========
+            // VDW C锉（18种）
             { id: 85, category: "VDW C锉", name: "VDW C锉", spec: "21mm 06#" },
             { id: 86, category: "VDW C锉", name: "VDW C锉", spec: "21mm 08#" },
             { id: 87, category: "VDW C锉", name: "VDW C锉", spec: "21mm 10#" },
@@ -127,7 +128,7 @@
             { id: 101, category: "VDW C锉", name: "VDW C锉", spec: "25mm 35#" },
             { id: 102, category: "VDW C锉", name: "VDW C锉", spec: "25mm 40#" },
 
-            // ========== 马尼K锉（18种） ==========
+            // 马尼K锉（18种）
             { id: 103, category: "马尼K锉", name: "马尼K锉", spec: "21mm 06#" },
             { id: 104, category: "马尼K锉", name: "马尼K锉", spec: "21mm 08#" },
             { id: 105, category: "马尼K锉", name: "马尼K锉", spec: "21mm 10#" },
@@ -147,7 +148,7 @@
             { id: 119, category: "马尼K锉", name: "马尼K锉", spec: "25mm 35#" },
             { id: 120, category: "马尼K锉", name: "马尼K锉", spec: "25mm 40#" },
 
-            // ========== 马尼H锉（18种） ==========
+            // 马尼H锉（18种）
             { id: 121, category: "马尼H锉", name: "马尼H锉", spec: "21mm 06#" },
             { id: 122, category: "马尼H锉", name: "马尼H锉", spec: "21mm 08#" },
             { id: 123, category: "马尼H锉", name: "马尼H锉", spec: "21mm 10#" },
@@ -165,7 +166,97 @@
             { id: 135, category: "马尼H锉", name: "马尼H锉", spec: "25mm 25#" },
             { id: 136, category: "马尼H锉", name: "马尼H锉", spec: "25mm 30#" },
             { id: 137, category: "马尼H锉", name: "马尼H锉", spec: "25mm 35#" },
-            { id: 138, category: "马尼H锉", name: "马尼H锉", spec: "25mm 40#" }
+            { id: 138, category: "马尼H锉", name: "马尼H锉", spec: "25mm 40#" },
+
+            // ========== 新增分类 ==========
+            // 马尼球钻
+            { id: 139, category: "马尼球钻", name: "马尼球钻", spec: "BR-31" },
+            { id: 140, category: "马尼球钻", name: "马尼球钻", spec: "BR-41" },
+            { id: 141, category: "马尼球钻", name: "马尼球钻", spec: "BR-45" },
+
+            // 马尼蓝标车针
+            { id: 142, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "EX-21" },
+            { id: 143, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "EX-20" },
+            { id: 144, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "EX-31" },
+            { id: 145, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "EX-41" },
+            { id: 146, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "FO-25" },
+            { id: 147, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "FO-27" },
+            { id: 148, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "FO-32" },
+            { id: 149, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "RS-31" },
+            { id: 150, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "SI-47" },
+            { id: 151, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TC-11" },
+            { id: 152, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TF-11" },
+            { id: 153, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TF-22" },
+            { id: 154, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TR-11" },
+            { id: 155, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TR-21" },
+            { id: 156, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TR-26" },
+            { id: 157, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "WR-13" },
+            { id: 158, category: "马尼蓝标车针", name: "马尼蓝标车针", spec: "TF-S22" },
+
+            // 马尼红标车针
+            { id: 159, category: "马尼红标车针", name: "马尼红标车针", spec: "TC-11F" },
+            { id: 160, category: "马尼红标车针", name: "马尼红标车针", spec: "TC-21F" },
+            { id: 161, category: "马尼红标车针", name: "马尼红标车针", spec: "TR-11F" },
+            { id: 162, category: "马尼红标车针", name: "马尼红标车针", spec: "TR-13F" },
+            { id: 163, category: "马尼红标车针", name: "马尼红标车针", spec: "TR-21F" },
+
+            // 马尼黄标车针
+            { id: 164, category: "马尼黄标车针", name: "马尼黄标车针", spec: "CR-13EF" },
+            { id: 165, category: "马尼黄标车针", name: "马尼黄标车针", spec: "CR-11EF" },
+            { id: 166, category: "马尼黄标车针", name: "马尼黄标车针", spec: "CR-12EF" },
+            { id: 167, category: "马尼黄标车针", name: "马尼黄标车针", spec: "EX-21EF" },
+            { id: 168, category: "马尼黄标车针", name: "马尼黄标车针", spec: "FO-30EF" },
+            { id: 169, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TC-11EF" },
+            { id: 170, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TC-21EF" },
+            { id: 171, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TF-12EF" },
+            { id: 172, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TF-21EF" },
+            { id: 173, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TR-11EF" },
+            { id: 174, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TR-13EF" },
+            { id: 175, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TR-21EF" },
+            { id: 176, category: "马尼黄标车针", name: "马尼黄标车针", spec: "TR-26EF" },
+            { id: 177, category: "马尼黄标车针", name: "马尼黄标车针", spec: "EX-SS14EF" },
+            { id: 178, category: "马尼黄标车针", name: "马尼黄标车针", spec: "EX-SS33EF" },
+
+            // 粘接剂
+            { id: 179, category: "粘接剂", name: "粘接剂", spec: "U200" },
+            { id: 180, category: "粘接剂", name: "粘接剂", spec: "绿巨人" },
+            { id: 181, category: "粘接剂", name: "粘接剂", spec: "luting 2" },
+            { id: 182, category: "粘接剂", name: "粘接剂", spec: "U200-注射型" },
+
+            // 打桩相关
+            { id: 183, category: "打桩相关", name: "打桩相关", spec: "义获嘉纤维粘接套装" },
+            { id: 184, category: "打桩相关", name: "打桩相关", spec: "3M纤维桩-白" },
+            { id: 185, category: "打桩相关", name: "打桩相关", spec: "3M纤维桩-黄" },
+            { id: 186, category: "打桩相关", name: "打桩相关", spec: "3M纤维桩-红" },
+            { id: 187, category: "打桩相关", name: "打桩相关", spec: "康特纤维桩-蓝" },
+            { id: 188, category: "打桩相关", name: "打桩相关", spec: "皓齿纤维桩-黄" },
+            { id: 189, category: "打桩相关", name: "打桩相关", spec: "皓齿纤维桩-红" },
+            { id: 190, category: "打桩相关", name: "打桩相关", spec: "皓齿纤维桩-蓝" },
+
+            // 临时冠树脂
+            { id: 191, category: "临时冠树脂", name: "临时冠树脂", spec: "VOCO" },
+            { id: 192, category: "临时冠树脂", name: "临时冠树脂", spec: "嵌体泥" },
+
+            // 根充材料
+            { id: 193, category: "根充材料", name: "根充材料", spec: "Iroot SP" },
+            { id: 194, category: "根充材料", name: "根充材料", spec: "Iroot BP" },
+            { id: 195, category: "根充材料", name: "根充材料", spec: "KProot-SP" },
+            { id: 196, category: "根充材料", name: "根充材料", spec: "KProot-BP" },
+
+            // 橡皮障
+            { id: 197, category: "橡皮障", name: "橡皮障", spec: "橡皮障弓" },
+            { id: 198, category: "橡皮障", name: "橡皮障", spec: "橡皮障夹（备注型号）" },
+            { id: 199, category: "橡皮障", name: "橡皮障", spec: "橡皮障布" },
+            { id: 200, category: "橡皮障", name: "橡皮障", spec: "橡皮障夹钳" },
+
+            // 拔牙相关
+            { id: 201, category: "拔牙相关", name: "拔牙相关", spec: "加长裂钻（固美）" },
+            { id: 202, category: "拔牙相关", name: "拔牙相关", spec: "博纳塞" },
+
+            // 排龈线
+            { id: 203, category: "排龈线", name: "排龈线", spec: "#0" },
+            { id: 204, category: "排龈线", name: "排龈线", spec: "#00" },
+            { id: 205, category: "排龈线", name: "排龈线", spec: "#000" }
         ];
     </script>
 </head>
